@@ -1,3 +1,2 @@
-import IcUnsri from './lambang-unsri-png-3.svg';
-
-export {IcUnsri};
+export * from './icons';
+export * from './dummies';

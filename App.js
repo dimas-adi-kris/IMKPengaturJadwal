@@ -1,8 +1,8 @@
 import React from 'react';
-import {Register} from './src/pages/Opening';
+import {ListSemester, Profile} from './src/pages';
 
 const App = () => {
-  return <Register />;
+  return <Profile />;
 };
 
 export default App;
