@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import Button from '../../../components/atoms/Button';
+import {Button} from '../../../components/atoms';
 import Input from '../../../components/atoms/Input';
 
 const Login = () => {
@@ -13,14 +13,26 @@ const Login = () => {
           label="Email"
           textContentType="emailAddress"
           value={form.email}
+          onChangeText={value => {
+            setForm({...form, email: value});
+          }}
         />
         <Input
           label="Password"
           textContentType="password"
-          password={true}
+          password
           value={form.password}
+          onChangeText={value => {
+            // setForm('password', value);
+            setForm({...form, password: value});
+          }}
         />
-        <Button text="Login" />
+        <Button
+          text="Login"
+          onPress={() => {
+            console.log(form.email, form.password);
+          }}
+        />
       </View>
     </View>
   );

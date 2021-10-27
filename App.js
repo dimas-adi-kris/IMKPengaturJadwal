@@ -1,10 +1,8 @@
-import React, {useState} from 'react';
-import {StyleSheet} from 'react-native';
-import Login from './src/pages/Opening/Login';
+import React from 'react';
+import {Register} from './src/pages/Opening';
 
 const App = () => {
-  return <Login />;
+  return <Register />;
 };
 
 export default App;
-const style = StyleSheet.create({});

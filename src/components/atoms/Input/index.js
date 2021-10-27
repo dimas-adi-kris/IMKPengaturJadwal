@@ -1,15 +1,20 @@
 import React from 'react';
 import {StyleSheet, Text, TextInput, View} from 'react-native';
-
-const Input = ({label, textContentType, password, value}) => {
+/**
+ *
+ * @param {string} label - string untuk label
+ * @returns - return object text dan textInput
+ */
+const Input = ({label, onChangeText, textContentType, password, value}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{label}</Text>
       <TextInput
         style={styles.textInput}
-        textContentType={textContentType}
-        secureTextEntry={password}
         value={value}
+        textContentType={textContentType}
+        onChangeText={onChangeText}
+        secureTextEntry={password}
       />
     </View>
   );

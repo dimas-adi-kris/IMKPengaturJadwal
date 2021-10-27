@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
-import IcUnsri from './src/assets/lambang-unsri-png-3.svg';
+import {IcUnsri} from '../../..';
 
 const App = () => {
   // const [state, setstate] = useState('');
