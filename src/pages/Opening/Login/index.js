@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {Button} from '../../../components/atoms';
-import Input from '../../../components/atoms/Input';
+import {Button, Input} from '../../../components';
 
 const Login = () => {
   const [form, setForm] = useState({email: '', password: ''});

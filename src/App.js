@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {ListSemester, ProfileMainPage} from './pages/Main';
 
 const App = () => {
   return (
-    <View>
-      <Text>asdasd</Text>{' '}
-    </View>
+    <>
+      <ListSemester />
+    </>
   );
 };
 

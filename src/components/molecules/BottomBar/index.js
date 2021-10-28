@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import {IcHome, IcUser} from '../../../assets/icons';
+import {IcHome, IcUser} from '../../../assets';
 
 const BottomBar = () => {
   return (
