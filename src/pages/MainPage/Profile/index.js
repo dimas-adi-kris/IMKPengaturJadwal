@@ -1,7 +1,6 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {PicProfile} from '../../../assets';
-import BottomBar from '../../../components/molecules/BottomBar';
 import {colors} from '../../../utils';
 
 const Profile = () => {
@@ -12,14 +11,7 @@ const Profile = () => {
           <Image source={PicProfile} style={styles.avatar} />
           <Text style={styles.name}>Dimas</Text>
         </View>
-        <View style={styles.profileMenu}>
-          <TouchableOpacity style={styles.profileMenuItem}>
-            <Text>Menu</Text>
-          </TouchableOpacity>
-          <View style={styles.line} />
-        </View>
       </View>
-      <BottomBar />
     </View>
   );
 };
@@ -42,10 +34,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'blue',
   },
-  profileMenuItem: {
-    padding: 20,
-    backgroundColor: 'white',
-  },
+
   avatar: {
     width: 110,
     height: 110,
@@ -56,9 +45,5 @@ const styles = StyleSheet.create({
     color: colors.mainColors.dark[800],
     // colors.mainColors.dark[800],
     marginTop: 13,
-  },
-  line: {
-    borderBottomColor: 'black',
-    borderBottomWidth: 1,
   },
 });
