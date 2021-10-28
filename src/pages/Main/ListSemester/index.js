@@ -2,12 +2,13 @@ import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {IcUnsri} from '../../../assets';
 import {SemesterButton} from '../../../components/atoms';
-import {BottomBar} from '../../../components/molecules';
+// import {BottomBar} from '../../../components/molecules';
 import mainStyle from '../../../utils/mainStyle';
 
 const ListSemester = () => {
+  console.log('load listSemester');
   return (
-    <View style={mainStyle.container}>
+    <View>
       <View style={styles.topbar}>
         <Text>Topbar</Text>
         {/* <View>
@@ -30,7 +31,7 @@ const ListSemester = () => {
           </Text>
         </ScrollView>
       </SafeAreaView>
-      <BottomBar />
+      {/* <BottomBar /> */}
     </View>
   );
 };

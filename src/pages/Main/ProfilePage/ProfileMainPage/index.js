@@ -1,20 +1,19 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {ProfilePic} from '../../../../assets';
-import {BottomBar} from '../../../../components/molecules';
+import {BottomBar, ProfileMenu} from '../../../../components/molecules';
 import {colors} from '../../../../utils';
 import mainStyle from '../../../../utils/mainStyle';
 
 const ProfilePage = () => {
   return (
-    <View style={mainStyle.container}>
-      <View style={styles.profile}>
-        <View style={styles.profilePreview}>
-          <Image source={ProfilePic} style={styles.avatar} />
-          <Text style={styles.name}>Dimas</Text>
-        </View>
+    <View style={styles.profile}>
+      <View style={styles.profilePreview}>
+        <Image source={ProfilePic} style={styles.avatar} />
+        <Text style={styles.name}>Dimas</Text>
       </View>
-      <BottomBar />
+      <ProfileMenu />
+      {/* <BottomBar /> */}
     </View>
   );
 };
