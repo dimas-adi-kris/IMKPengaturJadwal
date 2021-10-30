@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "561872852333",
+    "project_id": "imkpengaturjadwal",
+    "storage_bucket": "imkpengaturjadwal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:561872852333:android:5079ed6bf8f6f1c4cb7664",
+        "android_client_info": {
+          "package_name": "com.imkpengaturjadwal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "561872852333-cj0o16pgfuepegsilrosa7clr5j4n2n9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVdtnfGGy6TYjE2BCCS2dw4w7tDkuY8to"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "561872852333-cj0o16pgfuepegsilrosa7clr5j4n2n9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

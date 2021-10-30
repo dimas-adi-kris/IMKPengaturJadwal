@@ -6,8 +6,8 @@ import mainStyle from './utils/mainStyle';
 const App = () => {
   console.log('render app');
   // <View style={styles.container}>
-  //     <Text>lala</Text>
-  //    </View>
+  //   <Text>lala</Text>
+  // </View>
   return (
     <>
       <Router />

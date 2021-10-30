@@ -1,12 +1,12 @@
 import React from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {IcUnsri} from '../../../assets';
 import {SemesterButton} from '../../../components/atoms';
 import {BottomBar} from '../../../components/molecules';
 import mainStyle from '../../../utils/mainStyle';
 
 const ListSemester = ({history}) => {
   console.log('load listSemester');
+
   return (
     <View style={mainStyle.container}>
       <View style={mainStyle.topbar}>

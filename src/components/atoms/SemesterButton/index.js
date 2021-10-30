@@ -2,11 +2,10 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 
 const SemesterButton = ({value, history, sBaru}) => {
-  sBaru === true ? console.log('sBaru') : console.log('sLamo');
+  const r = sBaru === true ? '/tambah_jadwal' : '/jadwal';
+  console.log(r);
   return (
-    <TouchableOpacity
-      style={styles.semester}
-      onPress={() => history.push('/jadwal')}>
+    <TouchableOpacity style={styles.semester} onPress={() => history.push(r)}>
       <Text style={styles.semesterText}>{value}</Text>
     </TouchableOpacity>
   );
