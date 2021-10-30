@@ -8,7 +8,7 @@ import mainStyle from '../../../utils/mainStyle';
 const ListSemester = () => {
   console.log('load listSemester');
   return (
-    <View>
+    <View style={styles.listSemester}>
       <View style={styles.topbar}>
         <Text>Topbar</Text>
         {/* <View>

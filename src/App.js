@@ -1,13 +1,12 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import {BottomBar} from './components';
-import {ListSemester, MainMenu} from './pages';
-import ReactRouter from './pages/ReactRouter';
+import {StyleSheet, Text, View, Button} from 'react-native';
+import Router from './Router';
 
 const App = () => {
+  console.log('render app');
   return (
     <>
-      <MainMenu />
+      <Router />
     </>
   );
 };
