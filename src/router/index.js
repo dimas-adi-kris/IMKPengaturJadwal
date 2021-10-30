@@ -1,7 +1,7 @@
 import React from 'react';
 import {NativeRouter, Switch, Route} from 'react-router-native';
 import {StyleSheet, Text, View} from 'react-native';
-import {ListSemester, ProfileMainPage} from '../pages';
+import {ListSemester, ProfileMainPage, Schedule} from '../pages';
 
 const Router = () => {
   return (
@@ -15,6 +15,7 @@ const Router = () => {
               <ProfileMainPage {...props} desc="you did it! yeeyy" />
             )}
           />
+          <Route path="/jadwal" component={props => <Schedule {...props} />} />
         </Switch>
       </NativeRouter>
     </View>

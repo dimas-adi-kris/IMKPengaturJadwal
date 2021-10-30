@@ -3,7 +3,13 @@ const mainStyle = StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 20,
-    paddingTop: 10,
+  },
+  topbar: {
+    flexDirection: 'row',
+    backgroundColor: 'red',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    height: 70,
   },
 });
 

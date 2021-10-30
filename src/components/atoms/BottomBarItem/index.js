@@ -2,15 +2,18 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import {IcHome, IcUser} from '../../../assets';
 
-const BottomBarItem = ({value}) => {
+const BottomBarItem = ({value, history}) => {
   const icon =
     value === 'home' ? (
       <IcHome style={styles.bottomBarIcon} />
     ) : (
       <IcUser style={styles.bottomBarIcon} />
     );
+  const a = value === 'home' ? '/' : '/profile';
   return (
-    <TouchableOpacity style={styles.bottomBarItem}>
+    <TouchableOpacity
+      style={styles.bottomBarItem}
+      onPress={() => history.push(a)}>
       {icon}
       <Text style={styles.bottomBarText}>{value}</Text>
     </TouchableOpacity>

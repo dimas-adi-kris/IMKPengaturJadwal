@@ -5,7 +5,7 @@ import {BottomBar, ProfileMenu} from '../../../../components/molecules';
 import {colors} from '../../../../utils';
 import mainStyle from '../../../../utils/mainStyle';
 
-const ProfilePage = () => {
+const ProfilePage = ({history}) => {
   return (
     <View style={styles.profile}>
       <View style={styles.profilePreview}>
@@ -13,7 +13,7 @@ const ProfilePage = () => {
         <Text style={styles.name}>Dimas</Text>
       </View>
       <ProfileMenu />
-      {/* <BottomBar /> */}
+      <BottomBar history={history} />
     </View>
   );
 };

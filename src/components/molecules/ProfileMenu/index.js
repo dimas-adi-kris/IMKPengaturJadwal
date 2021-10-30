@@ -16,6 +16,7 @@ const ProfileMenu = () => {
 export default ProfileMenu;
 
 const styles = StyleSheet.create({
+  profileMenu: {flex: 1},
   line: {
     borderBottomColor: 'black',
     borderBottomWidth: 1,
