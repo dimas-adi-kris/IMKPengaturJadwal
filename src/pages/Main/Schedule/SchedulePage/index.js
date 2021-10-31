@@ -1,10 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {BackButton} from 'react-router-native';
+import {BackButton, useLocation} from 'react-router-native';
 import {IcLeftArrow, IcRightArrow} from '../../../../assets';
 import mainStyle from '../../../../utils/mainStyle';
 
 const SchedulePage = ({history}) => {
+  const data = useLocation().state;
+  console.log(data);
   return (
     <View style={mainStyle.container}>
       <View style={mainStyle.topbar}>

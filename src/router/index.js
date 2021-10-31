@@ -3,6 +3,8 @@ import {NativeRouter, Switch, Route} from 'react-router-native';
 import {StyleSheet, View} from 'react-native';
 import {
   ListSemester,
+  MataKuliahAdd,
+  MataKuliahPage,
   ProfileMainPage,
   ScheduleAdd,
   SchedulePage,
@@ -15,6 +17,7 @@ const Router = () => {
       <NativeRouter>
         <Switch>
           <Route exact path="/" component={ListSemester} />
+          <Route path="/main_menu" component={ListSemester} />
           <Route
             path="/profile"
             component={props => (
@@ -32,6 +35,14 @@ const Router = () => {
           <Route
             path="/menu_semester"
             component={props => <SemesterMenu {...props} />}
+          />
+          <Route
+            path="/daftar_mataKuliah"
+            component={props => <MataKuliahPage {...props} />}
+          />
+          <Route
+            path="/tambah_mataKuliah"
+            component={props => <MataKuliahAdd {...props} />}
           />
         </Switch>
       </NativeRouter>

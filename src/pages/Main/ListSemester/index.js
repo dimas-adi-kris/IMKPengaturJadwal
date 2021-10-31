@@ -5,7 +5,7 @@ import {SemesterButton} from '../../../components/atoms';
 import {BottomBar} from '../../../components/molecules';
 import mainStyle from '../../../utils/mainStyle';
 const ListSemester = ({history}) => {
-  console.log('load listSemester');
+  // console.log('load listSemester');
   global.foo = 'foo terganti';
 
   const [tahunAjaran, setTahunAjaran] = useState([]);
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollView: {
-    backgroundColor: 'pink',
+    // backgroundColor: 'pink',
     marginHorizontal: 20,
   },
   text: {

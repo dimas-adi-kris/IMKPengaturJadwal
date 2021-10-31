@@ -5,11 +5,17 @@ const mainStyle = StyleSheet.create({
     paddingHorizontal: 20,
   },
   topbar: {
-    flexDirection: 'row',
-    backgroundColor: 'red',
-    justifyContent: 'space-between',
+    flexDirection: 'column',
+    justifyContent: 'center',
     alignItems: 'center',
-    height: 70,
+    height: 100,
+    borderBottomWidth: 2,
+    borderBottomColor: '#CCC',
+  },
+  topbarTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'black',
   },
 });
 

@@ -12,6 +12,8 @@ const Input = ({
   password,
   value,
   keyboardType,
+  placeholder,
+  disable,
 }) => {
   return (
     <View style={styles.container}>
@@ -23,6 +25,7 @@ const Input = ({
         onChangeText={onChangeText}
         secureTextEntry={password}
         keyboardType={keyboardType}
+        placeholder={placeholder}
       />
     </View>
   );
@@ -31,7 +34,7 @@ const Input = ({
 export default Input;
 
 const styles = StyleSheet.create({
-  container: {marginVertical: 10},
+  container: {marginVertical: 10, width: '100%'},
   label: {
     fontSize: 18,
     marginBottom: 10,
@@ -41,6 +44,9 @@ const styles = StyleSheet.create({
     borderColor: '#CCC',
     borderRadius: 15,
     paddingHorizontal: 20,
-    backgroundColor: '#EEE',
+    backgroundColor: '#FFF',
+    fontSize: 20,
+    color: '#666',
+    // width: '100%',
   },
 });

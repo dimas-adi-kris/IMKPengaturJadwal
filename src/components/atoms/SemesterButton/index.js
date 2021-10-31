@@ -4,7 +4,9 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 const SemesterButton = ({value, history, sBaru, data}) => {
   const r = sBaru === true ? '/tambah_semester' : '/menu_semester';
   return (
-    <TouchableOpacity style={styles.semester} onPress={() => history.push(r)}>
+    <TouchableOpacity
+      style={styles.semester}
+      onPress={() => history.push({pathname: r, state: data})}>
       <Text style={styles.semesterText}>{value}</Text>
     </TouchableOpacity>
   );

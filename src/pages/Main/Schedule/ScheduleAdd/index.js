@@ -21,15 +21,12 @@ const ScheduleAdd = ({history}) => {
         <Input
           value={form.tahunAjaran}
           label="Tahun Ajaran"
+          keyboardType="numeric"
           onChangeText={value => {
             setForm({...form, tahunAjaran: value});
           }}
         />
-        <Button
-          text="Tambah Semester"
-          keyboardType="numberic"
-          onPress={() => regSemester(history)}
-        />
+        <Button text="Tambah Semester" onPress={() => regSemester(history)} />
       </View>
       <BackButton />
     </View>
