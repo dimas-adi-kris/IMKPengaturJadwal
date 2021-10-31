@@ -24,14 +24,13 @@ export default BottomBarItem;
 
 const styles = StyleSheet.create({
   bottomBarItem: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'green',
-    marginHorizontal: 60,
     width: 55,
     height: 55,
-    borderRadius: 100 / 2,
+    borderRadius: 55 / 2,
+    marginHorizontal: 50,
   },
   bottomBarIcon: {
     width: '30%',

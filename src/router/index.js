@@ -6,6 +6,7 @@ import {
   ProfileMainPage,
   ScheduleAdd,
   SchedulePage,
+  SemesterMenu,
 } from '../pages';
 
 const Router = () => {
@@ -25,8 +26,12 @@ const Router = () => {
             component={props => <SchedulePage {...props} />}
           />
           <Route
-            path="/tambah_jadwal"
+            path="/tambah_semester"
             component={props => <ScheduleAdd {...props} />}
+          />
+          <Route
+            path="/menu_semester"
+            component={props => <SemesterMenu {...props} />}
           />
         </Switch>
       </NativeRouter>

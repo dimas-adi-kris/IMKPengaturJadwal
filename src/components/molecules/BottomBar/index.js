@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   bottomBar: {
     flexDirection: 'row',
     height: 80,
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'blue',
     borderTopLeftRadius: 20,

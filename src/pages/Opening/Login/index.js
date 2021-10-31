@@ -12,6 +12,7 @@ const Login = () => {
           label="Email"
           textContentType="emailAddress"
           value={form.email}
+          keyboardType="email-address"
           onChangeText={value => {
             setForm({...form, email: value});
           }}
@@ -22,7 +23,6 @@ const Login = () => {
           password
           value={form.password}
           onChangeText={value => {
-            // setForm('password', value);
             setForm({...form, password: value});
           }}
         />

@@ -1,33 +1,34 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {BackButton} from 'react-router-native';
-import SelectDropdown from 'react-native-select-dropdown';
 import mainStyle from '../../../../utils/mainStyle';
+import {Button, Input} from '../../../../components';
+import {TAadd} from '../../../../utils/Model';
 
-const countries = ['Egypt', 'Canada', 'Australia', 'Ireland'];
-const ScheduleAdd = () => {
+const ScheduleAdd = ({history}) => {
+  console.log(global.foo);
+  const [form, setForm] = useState({tahunAjaran: ''});
+  const regSemester = () => {
+    TAadd(form);
+    history.push('/');
+  };
   return (
     <View style={mainStyle.container}>
-      <View style={mainStyle.topbar}>
-        <Text>Halaman tambah semester</Text>
+      <View style={styles.topbar}>
+        <Text style={styles.topbarText}>Tambah Semester</Text>
       </View>
       <View style={styles.addSemester}>
-        <Text>make it like it never happened</Text>
-        <SelectDropdown
-          data={countries}
-          onSelect={(selectedItem, index) => {
-            console.log(selectedItem, index);
+        <Input
+          value={form.tahunAjaran}
+          label="Tahun Ajaran"
+          onChangeText={value => {
+            setForm({...form, tahunAjaran: value});
           }}
-          buttonTextAfterSelection={(selectedItem, index) => {
-            // text represented after item is selected
-            // if data array is an array of objects then return selectedItem.property to render after item is selected
-            return selectedItem;
-          }}
-          rowTextForSelection={(item, index) => {
-            // text represented for each item in dropdown
-            // if data array is an array of objects then return item.property to represent item in dropdown
-            return item;
-          }}
+        />
+        <Button
+          text="Tambah Semester"
+          keyboardType="numberic"
+          onPress={() => regSemester(history)}
         />
       </View>
       <BackButton />
@@ -37,5 +38,19 @@ const ScheduleAdd = () => {
 export default ScheduleAdd;
 
 const styles = StyleSheet.create({
-  addSemester: {flex: 1, backgroundColor: 'green'},
+  addSemester: {
+    flex: 1,
+    paddingVertical: 20,
+  },
+  topbar: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 70,
+    borderBottomWidth: 1,
+    borderBottomColor: 'grey',
+  },
+  topbarText: {
+    fontSize: 30,
+  },
 });

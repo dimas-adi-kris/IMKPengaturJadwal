@@ -2,6 +2,7 @@ import React from 'react';
 import {StyleSheet, Text, View, Button} from 'react-native';
 import Router from './Router';
 import mainStyle from './utils/mainStyle';
+import global from './global';
 
 const App = () => {
   console.log('render app');
