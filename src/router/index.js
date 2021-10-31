@@ -1,6 +1,6 @@
 import React from 'react';
 import {NativeRouter, Switch, Route} from 'react-router-native';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {
   ListSemester,
   ProfileMainPage,

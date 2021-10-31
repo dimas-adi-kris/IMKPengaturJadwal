@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 import {BackButton} from 'react-router-native';
 import mainStyle from '../../../../utils/mainStyle';
