@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {BackHandler, StyleSheet, Text, ToastAndroid, View} from 'react-native';
 import {BackButton, useLocation} from 'react-router-native';
 import SelectDropdown from 'react-native-select-dropdown';
 
@@ -8,28 +8,25 @@ import mainStyle from '../../../../utils/mainStyle';
 import {MKadd} from '../../../../utils/Model';
 
 const MataKuliahAdd = ({history}) => {
-  const data = useLocation().state;
+  const mataKuliah = useLocation().mataKuliah;
+  const tahunAjar = useLocation().tahunAjar;
   const isBaru = useLocation().sBaru;
   const btnTextTambah = isBaru ? 'Tambah' : 'Update';
   const btnHapus = isBaru ? <View /> : <Button text="Delete" act="danger" />;
-  console.log(isBaru);
-  console.log('data');
   const [formMk, setFormMk] = useState({
-    mataKuliah: data.mataKuliah ? data.mataKuliah : '',
-    kodeMK: data.kodeMK ? data.kodeMK : '',
-    hari: data ? data.hari : '',
-    waktuMulai: data.waktuMulai ? data.waktuMulai : '',
-    waktuAkhir: data.waktuAkhir ? data.waktuAkhir : '',
-    TahunAjaran: data.id,
+    nama: mataKuliah ? mataKuliah.nama : '',
+    kodeMK: mataKuliah ? mataKuliah.kodeMK : '',
+    hari: mataKuliah ? mataKuliah.hari : '',
+    waktuMulai: mataKuliah ? mataKuliah.waktuMulai : '',
+    waktuAkhir: mataKuliah ? mataKuliah.waktuAkhir : '',
+    TahunAjaran: tahunAjar.id,
+    id: mataKuliah ? mataKuliah.id : '',
   });
-  console.log(formMk.hari === '');
-  console.log(data);
-  console.log(formMk);
   const title =
-    data.mataKuliah !== undefined ? data.mataKuliah : 'Tambah Mata Kuliah';
+    mataKuliah !== undefined ? mataKuliah.nama : 'Tambah Mata Kuliah';
   const regMK = () => {
     MKadd(formMk);
-    history.push({pathname: '/daftar_mataKuliah', state: data});
+    history.push({pathname: '/daftar_mataKuliah', tahunAjar: tahunAjar});
   };
   const hari = [
     'Senin',
@@ -40,7 +37,7 @@ const MataKuliahAdd = ({history}) => {
     'Sabtu',
     'Minggu',
   ];
-  //   setFormMk(data.mataKuliah !== undefined ? data : formMk);
+
   return (
     <View style={mainStyle.container}>
       <View style={mainStyle.topbar}>
@@ -49,9 +46,9 @@ const MataKuliahAdd = ({history}) => {
       <View>
         <Input
           label="Mata Kuliah"
-          value={formMk.mataKuliah}
+          value={formMk.nama}
           onChangeText={value => {
-            setFormMk({...formMk, mataKuliah: value});
+            setFormMk({...formMk, nama: value});
           }}
         />
         <Input

@@ -11,9 +11,11 @@ import {
 import {BackButton, useLocation} from 'react-router-native';
 import mainStyle from '../../../../utils/mainStyle';
 import {IcPencil, IcPlus} from '../../../../assets/icons/outline';
+import {FAB} from 'react-native-paper';
+import {FloatingButton} from '../../../../components';
 
 const MataKuliahPage = ({history}) => {
-  const data = useLocation().state;
+  const data = useLocation().tahunAjar;
   const [mataKuliah, setMataKuliah] = useState([]);
   const [loading, setloading] = useState(true);
   useEffect(() => {
@@ -41,21 +43,10 @@ const MataKuliahPage = ({history}) => {
         <Text style={mainStyle.topbarTitle}>Mata Kuliah pada Tahun Ajar</Text>
         <Text style={mainStyle.topbarTitle}>{data.tahunAjaran}</Text>
       </View>
+
       <SafeAreaView style={styles.matakuliah}>
         <ScrollView>
           {/* Tambah MK */}
-          <TouchableOpacity
-            style={styles.mataKuliahItem}
-            onPress={() =>
-              history.push({
-                pathname: '/tambah_mataKuliah',
-                state: data,
-                sBaru: true,
-              })
-            }>
-            <IcPlus style={styles.matakuliahIcon} />
-            <Text style={styles.mataKuliahText}>Tambah Mata kuliah</Text>
-          </TouchableOpacity>
           {/* end Tambah MK */}
           {/* Daftar MK */}
           {loading ? (
@@ -69,10 +60,14 @@ const MataKuliahPage = ({history}) => {
                   key={index}
                   style={styles.mataKuliahItem}
                   onPress={() =>
-                    history.push({pathname: '/tambah_mataKuliah', state: item})
+                    history.push({
+                      pathname: '/tambah_mataKuliah',
+                      mataKuliah: item,
+                      tahunAjar: data,
+                    })
                   }>
                   <IcPencil style={styles.matakuliahIcon} />
-                  <Text style={styles.mataKuliahText}>{item.mataKuliah}</Text>
+                  <Text style={styles.mataKuliahText}>{item.nama}</Text>
                 </TouchableOpacity>
               );
             })
@@ -80,6 +75,12 @@ const MataKuliahPage = ({history}) => {
           {/* end Daftar MK */}
         </ScrollView>
       </SafeAreaView>
+      <FloatingButton
+        history={history}
+        pathname="/tambah_mataKuliah"
+        dataPassHistory={data}
+      />
+
       <BackButton />
     </View>
   );
@@ -92,6 +93,15 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 20,
   },
+  tambahMataKuliah: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#ee6e73',
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+  },
   mataKuliahItem: {
     borderRadius: 20,
     backgroundColor: 'yellow',
@@ -100,7 +110,6 @@ const styles = StyleSheet.create({
     padding: 40,
     marginVertical: 10,
   },
-  matakuliahIcon: {width: 30, height: 30, color: 'black'},
   mataKuliahText: {
     color: 'black',
     fontWeight: 'bold',
@@ -110,4 +119,5 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginBottom: 10,
   },
+  fab: {},
 });

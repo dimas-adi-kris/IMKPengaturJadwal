@@ -3,6 +3,7 @@ import React from 'react';
 import Router from './Router';
 import global from './global';
 import {LogBox} from 'react-native';
+import {Provider as PaperProvider} from 'react-native-paper';
 global;
 
 const App = () => {
@@ -12,9 +13,9 @@ const App = () => {
   //   <Text>lala</Text>
   // </View>
   return (
-    <>
+    <PaperProvider>
       <Router />
-    </>
+    </PaperProvider>
   );
 };
 

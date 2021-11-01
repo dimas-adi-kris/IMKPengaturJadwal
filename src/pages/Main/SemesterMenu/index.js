@@ -24,7 +24,7 @@ const SemesterMenu = ({history}) => {
           <TouchableOpacity
             style={styles.menuItem}
             onPress={() =>
-              history.push({pathname: '/daftar_mataKuliah', state: data})
+              history.push({pathname: '/daftar_mataKuliah', tahunAjar: data})
             }>
             <IcList style={styles.menuIcon} />
             <Text style={styles.menuText}>Daftar Mata Kuliah</Text>

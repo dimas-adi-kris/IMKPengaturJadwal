@@ -1,6 +1,14 @@
 import React, {useState, useEffect} from 'react';
 import firestore from '@react-native-firebase/firestore';
-import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {
+  BackHandler,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  ToastAndroid,
+  View,
+} from 'react-native';
 import {SemesterButton} from '../../../components/atoms';
 import {BottomBar} from '../../../components/molecules';
 import mainStyle from '../../../utils/mainStyle';
@@ -10,7 +18,17 @@ const ListSemester = ({history}) => {
 
   const [tahunAjaran, setTahunAjaran] = useState([]);
   const [loading, setloading] = useState(true);
+  const backAction = () => {
+    ToastAndroid.show('BackButton Pressed', ToastAndroid.SHORT);
+    BackHandler.exitApp();
+    return true;
+  };
+  useEffect(() => {
+    BackHandler.addEventListener('hardwareBackPress', backAction);
 
+    return () =>
+      BackHandler.removeEventListener('hardwareBackPress', backAction);
+  }, []);
   useEffect(() => {
     let mounted = true;
     firestore()
