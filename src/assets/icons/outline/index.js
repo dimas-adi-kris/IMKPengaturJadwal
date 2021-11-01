@@ -4,4 +4,15 @@ import IcLeftArrow from './ic-leftArrow.svg';
 import IcRightArrow from './ic-rightArrow.svg';
 import IcCalendar from './ic-calendar.svg';
 import IcList from './ic-list.svg';
-export {IcUser, IcHome, IcLeftArrow, IcRightArrow, IcCalendar, IcList};
+import IcPlus from './ic-plus.svg';
+import IcPencil from './ic-pencil';
+export {
+  IcUser,
+  IcHome,
+  IcLeftArrow,
+  IcRightArrow,
+  IcCalendar,
+  IcList,
+  IcPlus,
+  IcPencil,
+};

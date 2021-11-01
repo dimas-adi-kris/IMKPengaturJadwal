@@ -9,7 +9,10 @@ const ListSemester = ({history}) => {
   global.foo = 'foo terganti';
 
   const [tahunAjaran, setTahunAjaran] = useState([]);
+  const [loading, setloading] = useState(true);
+
   useEffect(() => {
+    let mounted = true;
     firestore()
       .collection('TahunAjaran')
       .orderBy('tahunAjaran', 'desc')
@@ -22,7 +25,14 @@ const ListSemester = ({history}) => {
             {id: doc.id, ...doc.data()},
           ]);
         });
+        if (mounted) {
+          setloading(false);
+        }
       });
+    console.log(mounted);
+    return function cleanup() {
+      mounted = false;
+    };
   }, []);
   return (
     <View style={mainStyle.container}>
@@ -35,16 +45,20 @@ const ListSemester = ({history}) => {
       <SafeAreaView style={styles.listSemester}>
         <ScrollView style={styles.scrollView}>
           <SemesterButton value="Semester Baru" sBaru history={history} />
-          {tahunAjaran.map((item, index) => {
-            return (
-              <SemesterButton
-                key={index}
-                value={item.tahunAjaran}
-                history={history}
-                data={item}
-              />
-            );
-          })}
+          {loading ? (
+            <SemesterButton key={111111} value="Loading..." />
+          ) : (
+            tahunAjaran.map((item, index) => {
+              return (
+                <SemesterButton
+                  key={index}
+                  value={item.tahunAjaran}
+                  history={history}
+                  data={item}
+                />
+              );
+            })
+          )}
         </ScrollView>
       </SafeAreaView>
       <BottomBar history={history} />

@@ -17,7 +17,7 @@ export default SemesterButton;
 const styles = StyleSheet.create({
   semester: {
     borderRadius: 20,
-    backgroundColor: 'yellow',
+    backgroundColor: 'green',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 40,

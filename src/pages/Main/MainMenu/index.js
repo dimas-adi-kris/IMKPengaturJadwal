@@ -5,7 +5,7 @@ import {ListSemester, ProfileMainPage} from '..';
 import {IcHome, IcUser} from '../../../assets';
 import mainStyle from '../../../utils/mainStyle';
 
-const index = () => {
+const MainMenu = () => {
   return (
     <NativeRouter>
       <View style={mainStyle.container}>
@@ -33,7 +33,7 @@ const index = () => {
   );
 };
 
-export default index;
+export default MainMenu;
 
 const styles = StyleSheet.create({
   bottomBar: {

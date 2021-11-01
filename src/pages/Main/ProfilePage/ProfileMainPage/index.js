@@ -12,7 +12,7 @@ const ProfilePage = ({history}) => {
         <Image source={ProfilePic} style={styles.avatar} />
         <Text style={styles.name}>Dimas</Text>
       </View>
-      <ProfileMenu />
+      <ProfileMenu history={history} />
       <BottomBar history={history} />
     </View>
   );
@@ -23,14 +23,13 @@ export default ProfilePage;
 const styles = StyleSheet.create({
   profile: {
     flex: 1,
-    backgroundColor: 'red',
     paddingHorizontal: 20,
+    backgroundColor: '#EEE',
   },
   profilePreview: {
     height: 300,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'blue',
   },
 
   avatar: {

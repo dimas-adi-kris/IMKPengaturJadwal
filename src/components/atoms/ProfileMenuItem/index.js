@@ -14,6 +14,6 @@ export default ProfileMenuItem;
 const styles = StyleSheet.create({
   profileMenuItem: {
     padding: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#EEE',
   },
 });

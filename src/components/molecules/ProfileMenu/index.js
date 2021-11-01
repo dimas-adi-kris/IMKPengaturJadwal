@@ -2,10 +2,10 @@ import React from 'react';
 import {StyleSheet, View} from 'react-native';
 import ProfileMenuItem from '../../atoms/ProfileMenuItem';
 
-const ProfileMenu = () => {
+const ProfileMenu = ({history}) => {
   return (
     <View style={styles.profileMenu}>
-      <ProfileMenuItem value="Menu" />
+      <ProfileMenuItem value="Edit Profile" />
       <View style={styles.line} />
       <ProfileMenuItem value="Setting" />
       <View style={styles.line} />

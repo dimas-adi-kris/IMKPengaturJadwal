@@ -9,15 +9,22 @@ import {MKadd} from '../../../../utils/Model';
 
 const MataKuliahAdd = ({history}) => {
   const data = useLocation().state;
+  const isBaru = useLocation().sBaru;
+  const btnTextTambah = isBaru ? 'Tambah' : 'Update';
+  const btnHapus = isBaru ? <View /> : <Button text="Delete" act="danger" />;
+  console.log(isBaru);
+  console.log('data');
   const [formMk, setFormMk] = useState({
-    mataKuliah: '',
-    kodeMK: '',
-    hari: '',
-    waktuMulai: '',
-    waktuAkhir: '',
+    mataKuliah: data.mataKuliah ? data.mataKuliah : '',
+    kodeMK: data.kodeMK ? data.kodeMK : '',
+    hari: data ? data.hari : '',
+    waktuMulai: data.waktuMulai ? data.waktuMulai : '',
+    waktuAkhir: data.waktuAkhir ? data.waktuAkhir : '',
     TahunAjaran: data.id,
   });
+  console.log(formMk.hari === '');
   console.log(data);
+  console.log(formMk);
   const title =
     data.mataKuliah !== undefined ? data.mataKuliah : 'Tambah Mata Kuliah';
   const regMK = () => {
@@ -29,10 +36,11 @@ const MataKuliahAdd = ({history}) => {
     'Selasa',
     'Rabu',
     'Kamis',
-    `Jum'at`,
+    "Jum'at",
     'Sabtu',
     'Minggu',
   ];
+  //   setFormMk(data.mataKuliah !== undefined ? data : formMk);
   return (
     <View style={mainStyle.container}>
       <View style={mainStyle.topbar}>
@@ -53,13 +61,6 @@ const MataKuliahAdd = ({history}) => {
             setFormMk({...formMk, kodeMK: value});
           }}
         />
-        {/* <Input
-          label="Hari"
-          value={formMk.hari}
-          onChangeText={value => {
-            setFormMk({...formMk, hari: value});
-          }}
-        /> */}
         <View>
           <Text style={styles.label}>Hari</Text>
           <SelectDropdown
@@ -70,6 +71,7 @@ const MataKuliahAdd = ({history}) => {
             }}
             buttonStyle={styles.dropdown}
             defaultButtonText="Pilih Hari"
+            defaultValueByIndex={formMk.hari}
           />
         </View>
         <View style={styles.waktu}>
@@ -98,12 +100,13 @@ const MataKuliahAdd = ({history}) => {
           </View>
         </View>
         <Button
-          text="Tambah"
+          text={btnTextTambah}
           onPress={() => {
             regMK();
             console.log(formMk);
           }}
         />
+        {btnHapus}
       </View>
       <BackButton />
     </View>
