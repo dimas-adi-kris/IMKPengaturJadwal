@@ -1,11 +1,12 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {ProfilePic} from '../../../../assets';
+import {Button} from '../../../../components';
 import {BottomBar, ProfileMenu} from '../../../../components/molecules';
-import {colors} from '../../../../utils';
+import {clearItem, colors} from '../../../../utils';
 import mainStyle from '../../../../utils/mainStyle';
 
-const ProfilePage = ({history}) => {
+const ProfileMainPage = ({history}) => {
   return (
     <View style={styles.profile}>
       <View style={styles.profilePreview}>
@@ -13,12 +14,22 @@ const ProfilePage = ({history}) => {
         <Text style={styles.name}>Dimas</Text>
       </View>
       <ProfileMenu history={history} />
+      <View>
+        <Button
+          act="danger"
+          text="Log Out"
+          onPress={() => {
+            clearItem();
+            history.push({pathname: '/'});
+          }}
+        />
+      </View>
       <BottomBar history={history} />
     </View>
   );
 };
 
-export default ProfilePage;
+export default ProfileMainPage;
 
 const styles = StyleSheet.create({
   profile: {

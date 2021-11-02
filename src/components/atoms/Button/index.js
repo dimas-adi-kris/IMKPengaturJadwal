@@ -3,7 +3,8 @@ import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 /**
  *
  * @param {function} onPress - fungsi
- * @returns
+ * @param {string} text - label text nya
+ * @param {string} act - warna. danger : merah. selain itu biru?
  */
 const Button = ({text, onPress, act}) => {
   return (

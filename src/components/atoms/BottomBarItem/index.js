@@ -9,7 +9,7 @@ const BottomBarItem = ({value, history}) => {
     ) : (
       <IcUser style={styles.bottomBarIcon} />
     );
-  const a = value === 'home' ? '/' : '/profile';
+  const a = value === 'home' ? '/main_menu' : '/profile';
   return (
     <TouchableOpacity
       style={styles.bottomBarItem}

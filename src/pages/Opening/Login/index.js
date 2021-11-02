@@ -1,12 +1,56 @@
-import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import firestore from '@react-native-firebase/firestore';
+import {StyleSheet, Text, ToastAndroid, View} from 'react-native';
 import {Button, Input} from '../../../components';
+import {ActivityIndicator} from 'react-native-paper';
+import {setItem} from '../../../utils';
 
-const Login = () => {
+const Login = ({history}) => {
   const [form, setForm] = useState({email: '', password: ''});
+  const [isLoading, setIsLoading] = useState(false);
+
+  const loginAct = () => {
+    // ToastAndroid.show('tes', ToastAndroid.SHORT);
+    setIsLoading(true);
+    let akun = [];
+    firestore()
+      .collection('Account')
+      .where('email', '==', form.email)
+      .get()
+      .then(snapshot => {
+        if (!snapshot.empty) {
+          snapshot.forEach(doc => {
+            akun.push({id: doc.id, ...doc.data()});
+          });
+          akun = akun[0];
+          akun.password === form.password
+            ? resAuth('', {isBerhasil: true, akun: akun})
+            : resAuth('Salah Password', {isBerhasil: false});
+        } else {
+          resAuth('akun tidak terdaftar', {isBerhasil: false});
+        }
+      })
+      .catch(err => {
+        resAuth(err, {isBerhasil: false});
+      });
+  };
+  const resAuth = async (pesan, status) => {
+    if (status.isBerhasil) {
+      console.log('berhasil login');
+      console.log(status.akun);
+      console.log('berhasil login');
+      setItem('auth', status.akun).then(() => {
+        history.push({pathname: '/main_menu'});
+      });
+    } else {
+      ToastAndroid.show(pesan, ToastAndroid.SHORT);
+    }
+    setIsLoading(false);
+  };
   return (
     <View style={styles.page}>
       <Text style={styles.titleText}>Masuk</Text>
+      {isLoading && <ActivityIndicator size="large" color="#00ff00" />}
       <View style={styles.loginArea}>
         <Input
           label="Email"
@@ -26,12 +70,7 @@ const Login = () => {
             setForm({...form, password: value});
           }}
         />
-        <Button
-          text="Login"
-          onPress={() => {
-            console.log(form.email, form.password);
-          }}
-        />
+        <Button text="Login" onPress={loginAct} />
       </View>
     </View>
   );

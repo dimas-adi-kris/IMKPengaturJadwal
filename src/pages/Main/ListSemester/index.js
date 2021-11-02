@@ -12,12 +12,13 @@ import {
 import {SemesterButton} from '../../../components/atoms';
 import {BottomBar} from '../../../components/molecules';
 import mainStyle from '../../../utils/mainStyle';
+import {getItem} from '../../../utils';
 const ListSemester = ({history}) => {
   // console.log('load listSemester');
-  global.foo = 'foo terganti';
 
   const [tahunAjaran, setTahunAjaran] = useState([]);
   const [loading, setloading] = useState(true);
+  const [dataPengguna, setDataPengguna] = useState({});
   const backAction = () => {
     ToastAndroid.show('BackButton Pressed', ToastAndroid.SHORT);
     BackHandler.exitApp();
@@ -47,7 +48,10 @@ const ListSemester = ({history}) => {
           setloading(false);
         }
       });
-    console.log(mounted);
+    console.log("getItem('auth')");
+    getItem('auth').then(res => {
+      console.log(res);
+    });
     return function cleanup() {
       mounted = false;
     };
@@ -62,7 +66,10 @@ const ListSemester = ({history}) => {
       </View>
       <SafeAreaView style={styles.listSemester}>
         <ScrollView style={styles.scrollView}>
+          {/* {dataPengguna.role === 1 && (
+          )} */}
           <SemesterButton value="Semester Baru" sBaru history={history} />
+
           {loading ? (
             <SemesterButton key={111111} value="Loading..." />
           ) : (
