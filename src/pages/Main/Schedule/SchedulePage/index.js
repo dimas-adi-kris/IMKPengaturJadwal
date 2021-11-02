@@ -72,7 +72,6 @@ const SchedulePage = ({history}) => {
       </>
     );
 
-  const [bcJadwal, setBcJadwal] = useState([]);
   useEffect(() => {
     let mounted = true;
     const jadwalDiProses = async () => {
@@ -142,7 +141,11 @@ const SchedulePage = ({history}) => {
                     item.isCrash ? '#FF2020' : '#FFECEC',
                   )}
                   onPress={() =>
-                    history.push({pathname: '/tambah_mataKuliah', state: item})
+                    history.push({
+                      pathname: '/tambah_mataKuliah',
+                      mataKuliah: item,
+                      data: data,
+                    })
                   }>
                   <Text
                     style={styles.scheduleText(

@@ -1,17 +1,22 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {ProfilePic} from '../../../../assets';
 import {Button} from '../../../../components';
 import {BottomBar, ProfileMenu} from '../../../../components/molecules';
-import {clearItem, colors} from '../../../../utils';
-import mainStyle from '../../../../utils/mainStyle';
+import {clearItem, colors, getItem} from '../../../../utils';
 
 const ProfileMainPage = ({history}) => {
+  const [dataPengguna, setDataPengguna] = useState({});
+  useEffect(() => {
+    getItem('auth').then(res => {
+      setDataPengguna(res);
+    });
+  }, []);
   return (
     <View style={styles.profile}>
       <View style={styles.profilePreview}>
         <Image source={ProfilePic} style={styles.avatar} />
-        <Text style={styles.name}>Dimas</Text>
+        <Text style={styles.name}>{dataPengguna.nama}</Text>
       </View>
       <ProfileMenu history={history} />
       <View>

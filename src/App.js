@@ -2,7 +2,8 @@ import React from 'react';
 // import {StyleSheet} from 'react-native';
 import Router from './Router';
 import global from './global';
-import {LogBox} from 'react-native';
+import {LogBox, View} from 'react-native';
+import {Furqon} from './pages';
 // import {Provider as PaperProvider} from 'react-native-paper';
 global;
 
@@ -12,6 +13,9 @@ const App = () => {
   // <View style={styles.container}>
   //   <Text>lala</Text>
   // </View>
+  // {/* <View>
+  //   <Furqon />
+  // </View> */}
   return (
     <>
       <Router />

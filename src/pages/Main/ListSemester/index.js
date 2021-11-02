@@ -25,6 +25,13 @@ const ListSemester = ({history}) => {
     return true;
   };
   useEffect(() => {
+    getItem('auth').then(res => {
+      console.log(res);
+      console.log('data');
+      // console.log(res);
+      console.log('data.akun');
+      setDataPengguna(res);
+    });
     BackHandler.addEventListener('hardwareBackPress', backAction);
 
     return () =>
@@ -32,6 +39,7 @@ const ListSemester = ({history}) => {
   }, []);
   useEffect(() => {
     let mounted = true;
+    // setDataPengguna(getItem('auth'));
     firestore()
       .collection('TahunAjaran')
       .orderBy('tahunAjaran', 'desc')
@@ -48,10 +56,7 @@ const ListSemester = ({history}) => {
           setloading(false);
         }
       });
-    console.log("getItem('auth')");
-    getItem('auth').then(res => {
-      console.log(res);
-    });
+    console.log(dataPengguna);
     return function cleanup() {
       mounted = false;
     };
@@ -66,9 +71,9 @@ const ListSemester = ({history}) => {
       </View>
       <SafeAreaView style={styles.listSemester}>
         <ScrollView style={styles.scrollView}>
-          {/* {dataPengguna.role === 1 && (
-          )} */}
-          <SemesterButton value="Semester Baru" sBaru history={history} />
+          {dataPengguna.role === 1 && (
+            <SemesterButton value="Semester Baru" sBaru history={history} />
+          )}
 
           {loading ? (
             <SemesterButton key={111111} value="Loading..." />

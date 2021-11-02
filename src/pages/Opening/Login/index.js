@@ -3,11 +3,17 @@ import firestore from '@react-native-firebase/firestore';
 import {StyleSheet, Text, ToastAndroid, View} from 'react-native';
 import {Button, Input} from '../../../components';
 import {ActivityIndicator} from 'react-native-paper';
-import {setItem} from '../../../utils';
+import {setItem, getItem} from '../../../utils';
 
 const Login = ({history}) => {
   const [form, setForm] = useState({email: '', password: ''});
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    getItem('auth').then(rs => {
+      console.log({rs: rs});
+    });
+  }, []);
 
   const loginAct = () => {
     // ToastAndroid.show('tes', ToastAndroid.SHORT);
@@ -36,10 +42,7 @@ const Login = ({history}) => {
   };
   const resAuth = async (pesan, status) => {
     if (status.isBerhasil) {
-      console.log('berhasil login');
-      console.log(status.akun);
-      console.log('berhasil login');
-      setItem('auth', status.akun).then(() => {
+      setItem('auth', status.akun).then(res => {
         history.push({pathname: '/main_menu'});
       });
     } else {

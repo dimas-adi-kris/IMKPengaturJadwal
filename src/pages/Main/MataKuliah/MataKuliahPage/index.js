@@ -11,13 +11,19 @@ import {
 import {BackButton, useLocation} from 'react-router-native';
 import mainStyle from '../../../../utils/mainStyle';
 import {IcPencil, IcPlus} from '../../../../assets/icons/outline';
-import {FAB} from 'react-native-paper';
 import {FloatingButton} from '../../../../components';
+import {getItem} from '../../../../utils';
 
 const MataKuliahPage = ({history}) => {
   const data = useLocation().tahunAjar;
+  const [dataPengguna, setDataPengguna] = useState({});
   const [mataKuliah, setMataKuliah] = useState([]);
   const [loading, setloading] = useState(true);
+  useEffect(() => {
+    getItem('auth').then(res => {
+      setDataPengguna(res);
+    });
+  }, []);
   useEffect(() => {
     let mounted = true;
     firestore()
@@ -37,6 +43,9 @@ const MataKuliahPage = ({history}) => {
       mounted = false;
     };
   }, []);
+
+  console.log(dataPengguna);
+
   return (
     <View style={mainStyle.container}>
       <View style={mainStyle.topbar}>
@@ -75,11 +84,13 @@ const MataKuliahPage = ({history}) => {
           {/* end Daftar MK */}
         </ScrollView>
       </SafeAreaView>
-      <FloatingButton
-        history={history}
-        pathname="/tambah_mataKuliah"
-        dataPassHistory={data}
-      />
+      {dataPengguna.role === 1 && (
+        <FloatingButton
+          history={history}
+          pathname="/tambah_mataKuliah"
+          dataPassHistory={{isBaru: true, ...data}}
+        />
+      )}
 
       <BackButton />
     </View>
@@ -110,6 +121,7 @@ const styles = StyleSheet.create({
     padding: 40,
     marginVertical: 10,
   },
+  matakuliahIcon: {width: 30, height: 30, color: 'black'},
   mataKuliahText: {
     color: 'black',
     fontWeight: 'bold',

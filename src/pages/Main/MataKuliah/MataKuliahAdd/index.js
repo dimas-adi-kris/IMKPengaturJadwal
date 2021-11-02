@@ -9,7 +9,7 @@ import {MKadd} from '../../../../utils/Model';
 
 const MataKuliahAdd = ({history}) => {
   const mataKuliah = useLocation().mataKuliah;
-  const tahunAjar = useLocation().tahunAjar;
+  const tahunAjar = useLocation().data;
   const isBaru = useLocation().sBaru;
   const btnTextTambah = isBaru ? 'Tambah' : 'Update';
   const btnHapus = isBaru ? <View /> : <Button text="Delete" act="danger" />;

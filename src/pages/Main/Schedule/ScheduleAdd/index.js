@@ -6,7 +6,6 @@ import {Button, Input} from '../../../../components';
 import {TAadd} from '../../../../utils/Model';
 
 const ScheduleAdd = ({history}) => {
-  console.log(global.foo);
   const [form, setForm] = useState({tahunAjaran: ''});
   const regSemester = () => {
     TAadd(form);
