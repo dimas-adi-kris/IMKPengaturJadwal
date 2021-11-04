@@ -10,38 +10,50 @@ import {
   ScheduleAdd,
   SchedulePage,
   SemesterMenu,
+  Splash,
 } from '../pages';
+import ProfileEdit from '../pages/Main/ProfilePage/ProfileEdit';
 
 const Router = () => {
   return (
     <View style={styles.contain}>
       <NativeRouter>
         <Switch>
-          <Route exact path="/" component={Login} />
-          <Route path="/main_menu" component={ListSemester} />
+          <Route exact path="/" component={Splash} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/main_menu" component={ListSemester} />
           <Route
+            exact
             path="/profile"
-            component={props => (
-              <ProfileMainPage {...props} desc="you did it! yeeyy" />
-            )}
+            component={props => <ProfileMainPage {...props} />}
           />
           <Route
+            exact
+            path="/profile/edit"
+            component={props => <ProfileEdit {...props} />}
+          />
+          <Route
+            exact
             path="/jadwal"
             component={props => <SchedulePage {...props} />}
           />
           <Route
+            exact
             path="/tambah_semester"
             component={props => <ScheduleAdd {...props} />}
           />
           <Route
+            exact
             path="/menu_semester"
             component={props => <SemesterMenu {...props} />}
           />
           <Route
+            exact
             path="/daftar_mataKuliah"
             component={props => <MataKuliahPage {...props} />}
           />
           <Route
+            exact
             path="/tambah_mataKuliah"
             component={props => <MataKuliahAdd {...props} />}
           />

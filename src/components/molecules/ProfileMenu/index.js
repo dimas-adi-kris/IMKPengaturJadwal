@@ -5,10 +5,10 @@ import ProfileMenuItem from '../../atoms/ProfileMenuItem';
 const ProfileMenu = ({history}) => {
   return (
     <View style={styles.profileMenu}>
-      <ProfileMenuItem value="Edit Profile" />
       <View style={styles.line} />
-      <ProfileMenuItem value="Setting" />
-      <View style={styles.line} />
+      <ProfileMenuItem value="Edit Profile" history={history} />
+      {/* <ProfileMenuItem value="Setting" />
+      <View style={styles.line} /> */}
     </View>
   );
 };

@@ -1,12 +1,62 @@
-import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import firestore from '@react-native-firebase/firestore';
+import {Alert, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ActivityIndicator} from 'react-native-paper';
 import {BackButton, useLocation} from 'react-router-native';
 import {IcCalendar, IcList} from '../../../assets';
+import {Button} from '../../../components';
+import {getItem, setItem} from '../../../utils';
 import mainStyle from '../../../utils/mainStyle';
+import {TAdelete} from '../../../utils/Model';
 
 const SemesterMenu = ({history}) => {
   const data = useLocation().state;
-  console.log(data);
+  const [isLoading, setIsLoading] = useState(false);
+  const [dataPengguna, setDataPengguna] = useState({});
+  useEffect(() => {
+    getItem('auth').then(rt => {
+      setDataPengguna(rt);
+      if (rt.role === 3) {
+        let storeJadwaldiTahunAjaran = [];
+        firestore()
+          .collection('MataKuliah')
+          .orderBy('waktuMulai')
+          .where('TahunAjaran', '==', data.id)
+          .get()
+          .then(docs => {
+            docs.forEach(element => {
+              storeJadwaldiTahunAjaran.push({
+                id: element.id,
+                ...element.data(),
+              });
+            });
+            setItem('jadwalForMahasiswa', storeJadwaldiTahunAjaran);
+          });
+      }
+    });
+    // getItem('auth').then(rs=>{
+    // })
+  }, []);
+  const hapusSemester = () => {
+    Alert.alert(
+      'Hapus Tahun Ajaran',
+      'Apakah anda ingin menghapus Tahun ajaran ' + data.tahunAjaran,
+      [
+        {
+          text: 'Batal',
+        },
+        {
+          text: 'Hapus',
+          onPress: () => {
+            setIsLoading(true);
+            TAdelete(data.id);
+            setIsLoading(false);
+            history.push('/main_menu');
+          },
+        },
+      ],
+    );
+  };
   return (
     <View style={mainStyle.container}>
       <View style={mainStyle.topbar}>
@@ -17,9 +67,11 @@ const SemesterMenu = ({history}) => {
         <View style={styles.mainMenu}>
           <TouchableOpacity
             style={styles.menuItem}
-            onPress={() => history.push({pathname: '/jadwal', state: data})}>
+            onPress={() =>
+              history.push({pathname: '/jadwal', tahunAjar: data})
+            }>
             <IcCalendar style={styles.menuIcon} />
-            <Text style={styles.menuText}>Jadwal Semester Ini</Text>
+            <Text style={styles.menuText}>Jadwal Semester</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.menuItem}
@@ -30,7 +82,24 @@ const SemesterMenu = ({history}) => {
             <Text style={styles.menuText}>Daftar Mata Kuliah</Text>
           </TouchableOpacity>
         </View>
+        {isLoading && <ActivityIndicator size="large" />}
+        {dataPengguna.role === 1 && (
+          <View style={styles.mainMenu}>
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={() => history.push({pathname: '/jadwal', state: data})}>
+              <IcCalendar style={styles.menuIcon} />
+              <Text style={styles.menuText}> Edit Tahun Ajar </Text>
+            </TouchableOpacity>
+            {/* <View style={styles.menuItem} /> */}
+          </View>
+        )}
       </View>
+      {dataPengguna.role === 1 && (
+        <View style={{height: 100}}>
+          <Button text="Hapus Semester" act="danger" onPress={hapusSemester} />
+        </View>
+      )}
       <BackButton />
     </View>
   );
@@ -47,36 +116,36 @@ const styles = StyleSheet.create({
     height: 70,
   },
   menu: {
-    height: 200,
-    // backgroundColor: 'yellow',
+    flex: 1,
+    backgroundColor: 'white',
   },
   mainMenu: {
-    flex: 1,
     flexDirection: 'row',
-    // margin: 20,
+    marginTop: 20,
     justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 20,
+    // marginHorizontal: 0,
   },
   menuIcon: {
     height: 50,
     width: 50,
     marginHorizontal: 20,
     color: 'black',
+    flex: 1,
   },
   menuItem: {
-    flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
     borderWidth: 1,
-    borderColor: '#DDD',
+    borderColor: '#AAA',
     borderRadius: 20,
     padding: 20,
     margin: 20,
+    flexDirection: 'column',
   },
   menuText: {
     textAlign: 'center',
     fontSize: 15,
     fontWeight: '800',
+    flexShrink: 1,
+    // flexWrap: 'wrap',
   },
 });

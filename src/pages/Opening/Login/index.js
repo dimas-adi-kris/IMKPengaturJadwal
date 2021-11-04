@@ -11,7 +11,7 @@ const Login = ({history}) => {
 
   useEffect(() => {
     getItem('auth').then(rs => {
-      console.log({rs: rs});
+      console.log(rs);
     });
   }, []);
 
@@ -74,6 +74,9 @@ const Login = ({history}) => {
           }}
         />
         <Button text="Login" onPress={loginAct} />
+        <View style={{alignItems: 'center'}}>
+          <Text>Register</Text>
+        </View>
       </View>
     </View>
   );

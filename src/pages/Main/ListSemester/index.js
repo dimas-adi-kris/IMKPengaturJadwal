@@ -64,7 +64,7 @@ const ListSemester = ({history}) => {
   return (
     <View style={mainStyle.container}>
       <View style={mainStyle.topbar}>
-        <Text>Topbar</Text>
+        <Text style={mainStyle.topbarTitle}>Daftar Semester</Text>
         {/* <View>
           <IcUnsri style={styles.avatar} />
         </View> */}

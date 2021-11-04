@@ -10,12 +10,12 @@ import {
 } from 'react-native';
 import {BackButton, useLocation} from 'react-router-native';
 import mainStyle from '../../../../utils/mainStyle';
-import {IcPencil, IcPlus} from '../../../../assets/icons/outline';
+import {IcPencil} from '../../../../assets/icons/outline';
 import {FloatingButton} from '../../../../components';
 import {getItem} from '../../../../utils';
 
 const MataKuliahPage = ({history}) => {
-  const data = useLocation().tahunAjar;
+  const tahunAjar = useLocation().tahunAjar;
   const [dataPengguna, setDataPengguna] = useState({});
   const [mataKuliah, setMataKuliah] = useState([]);
   const [loading, setloading] = useState(true);
@@ -28,7 +28,7 @@ const MataKuliahPage = ({history}) => {
     let mounted = true;
     firestore()
       .collection('MataKuliah')
-      .where('TahunAjaran', '==', data.id)
+      .where('TahunAjaran', '==', tahunAjar.id)
       .get()
       .then(snapshot => {
         setMataKuliah([]);
@@ -44,13 +44,11 @@ const MataKuliahPage = ({history}) => {
     };
   }, []);
 
-  console.log(dataPengguna);
-
   return (
     <View style={mainStyle.container}>
       <View style={mainStyle.topbar}>
         <Text style={mainStyle.topbarTitle}>Mata Kuliah pada Tahun Ajar</Text>
-        <Text style={mainStyle.topbarTitle}>{data.tahunAjaran}</Text>
+        <Text style={mainStyle.topbarTitle}>{tahunAjar.tahunAjaran}</Text>
       </View>
 
       <SafeAreaView style={styles.matakuliah}>
@@ -72,7 +70,7 @@ const MataKuliahPage = ({history}) => {
                     history.push({
                       pathname: '/tambah_mataKuliah',
                       mataKuliah: item,
-                      tahunAjar: data,
+                      tahunAjar: tahunAjar,
                     })
                   }>
                   <IcPencil style={styles.matakuliahIcon} />
@@ -88,7 +86,7 @@ const MataKuliahPage = ({history}) => {
         <FloatingButton
           history={history}
           pathname="/tambah_mataKuliah"
-          dataPassHistory={{isBaru: true, ...data}}
+          dataPassHistory={{isBaru: true, ...tahunAjar}}
         />
       )}
 

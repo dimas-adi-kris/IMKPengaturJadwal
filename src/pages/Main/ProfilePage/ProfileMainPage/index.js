@@ -9,13 +9,14 @@ const ProfileMainPage = ({history}) => {
   const [dataPengguna, setDataPengguna] = useState({});
   useEffect(() => {
     getItem('auth').then(res => {
+      res.photo = res.photo ? {uri: res.photo} : ProfilePic;
       setDataPengguna(res);
     });
   }, []);
   return (
     <View style={styles.profile}>
       <View style={styles.profilePreview}>
-        <Image source={ProfilePic} style={styles.avatar} />
+        <Image source={dataPengguna.photo} style={styles.avatar} />
         <Text style={styles.name}>{dataPengguna.nama}</Text>
       </View>
       <ProfileMenu history={history} />
@@ -25,7 +26,7 @@ const ProfileMainPage = ({history}) => {
           text="Log Out"
           onPress={() => {
             clearItem();
-            history.push({pathname: '/'});
+            history.push({pathname: '/login'});
           }}
         />
       </View>

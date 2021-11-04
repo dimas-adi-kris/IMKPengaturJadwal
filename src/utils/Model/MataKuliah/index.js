@@ -18,4 +18,8 @@ const MKadd = ({
         .doc(id)
         .update({TahunAjaran, hari, kodeMK, nama, waktuAkhir, waktuMulai});
 };
-export {MKadd};
+
+const MKdelete = async idMataKuliah => {
+  await firestore().collection('MataKuliah').doc(idMataKuliah).delete();
+};
+export {MKadd, MKdelete};

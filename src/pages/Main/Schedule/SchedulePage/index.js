@@ -11,12 +11,18 @@ import {
 import {BackButton, useLocation} from 'react-router-native';
 import {IcLeftArrow, IcRightArrow} from '../../../../assets';
 import mainStyle from '../../../../utils/mainStyle';
+import {getItem} from '../../../../utils';
 
 const SchedulePage = ({history}) => {
-  const data = useLocation().state;
+  const tahunAjar = useLocation().tahunAjar;
   const [jadwal, setJadwal] = useState([]);
   const [loading, setloading] = useState(true);
   const [whatDay, setWhatDay] = useState(0);
+  const [dataPengguna, setDataPengguna] = useState({});
+
+  // const [jadwalForMahasiswa, setJadwalForMahasiswa] = useState([]);
+  // const [isOnceJadwalForMahasiswa, setIsOnceJadwalForMahasiswa] =
+  //   useState(true);
 
   const [hari, setHari] = useState([
     'Senin',
@@ -71,51 +77,100 @@ const SchedulePage = ({history}) => {
         </TouchableOpacity>
       </>
     );
-
   useEffect(() => {
     let mounted = true;
-    const jadwalDiProses = async () => {
-      let brandNewJadwal = [];
-      let getData = await firestore()
-        .collection('MataKuliah')
-        .orderBy('waktuMulai')
-        .where('TahunAjaran', '==', data.id)
-        .where('hari', '==', whatDay)
-        .get();
-      setJadwal([]);
-      getData.forEach(doc => {
-        brandNewJadwal.push({id: doc.id, ...doc.data()});
-      });
-      for (let i = 0; i < brandNewJadwal.length; i++) {
-        for (let j = 0; j < brandNewJadwal.length; j++) {
-          // const waktuAkhirI =
-          //   Number(brandNewJadwal[i].waktuAkhir.split(':')[0]) * 60 +
-          //   Number(brandNewJadwal[i].waktuAkhir.split(':')[1]);
-          const waktuMulaiI =
-            Number(brandNewJadwal[i].waktuMulai.split(':')[0]) * 60 +
-            Number(brandNewJadwal[i].waktuMulai.split(':')[1]);
-          const waktuAkhirJ =
-            Number(brandNewJadwal[j].waktuAkhir.split(':')[0]) * 60 +
-            Number(brandNewJadwal[j].waktuAkhir.split(':')[1]);
-          const waktuMulaiJ =
-            Number(brandNewJadwal[j].waktuMulai.split(':')[0]) * 60 +
-            Number(brandNewJadwal[j].waktuMulai.split(':')[1]);
-          // if (brandNewJadwal[i].hari === whatDay && brandNewJadwal[j].hari === whatDay) {
-          if (waktuMulaiI > waktuMulaiJ && waktuMulaiI < waktuAkhirJ) {
-            brandNewJadwal[i].isCrash =
-              brandNewJadwal[i].hari === whatDay && true;
-            brandNewJadwal[j].isCrash =
-              brandNewJadwal[j].hari === whatDay && true;
+    getItem('auth').then(res => {
+      setDataPengguna(res);
+      if (res.role !== 3) {
+        const jadwalDiProses = async () => {
+          let brandNewJadwal = [];
+          let getData = await firestore()
+            .collection('MataKuliah')
+            .orderBy('waktuMulai')
+            .where('TahunAjaran', '==', tahunAjar.id)
+            .where('hari', '==', whatDay)
+            .get();
+          setJadwal([]);
+          getData.forEach(doc => {
+            brandNewJadwal.push({id: doc.id, ...doc.data()});
+          });
+          for (let i = 0; i < brandNewJadwal.length; i++) {
+            for (let j = 0; j < brandNewJadwal.length; j++) {
+              // const waktuAkhirI =
+              //   Number(brandNewJadwal[i].waktuAkhir.split(':')[0]) * 60 +
+              //   Number(brandNewJadwal[i].waktuAkhir.split(':')[1]);
+              const waktuMulaiI =
+                Number(brandNewJadwal[i].waktuMulai.split(':')[0]) * 60 +
+                Number(brandNewJadwal[i].waktuMulai.split(':')[1]);
+              const waktuAkhirJ =
+                Number(brandNewJadwal[j].waktuAkhir.split(':')[0]) * 60 +
+                Number(brandNewJadwal[j].waktuAkhir.split(':')[1]);
+              const waktuMulaiJ =
+                Number(brandNewJadwal[j].waktuMulai.split(':')[0]) * 60 +
+                Number(brandNewJadwal[j].waktuMulai.split(':')[1]);
+              // if (brandNewJadwal[i].hari === whatDay && brandNewJadwal[j].hari === whatDay) {
+              // console.log(waktuMulaiI, waktuMulaiJ);
+              if (waktuMulaiI >= waktuMulaiJ && waktuMulaiI < waktuAkhirJ) {
+                brandNewJadwal[i].isCrash =
+                  brandNewJadwal[i].hari === whatDay && true;
+                brandNewJadwal[j].isCrash =
+                  brandNewJadwal[j].hari === whatDay && true;
+              }
+              // }
+            }
           }
-          // }
-        }
+          setJadwal(brandNewJadwal);
+        };
+        jadwalDiProses();
+      } else {
+        getItem('jadwalForMahasiswa').then(rs => {
+          let jadwalMahasiswaToShow = [];
+          rs.forEach(doc => {
+            if (doc.hari === whatDay) {
+              jadwalMahasiswaToShow.push({...doc});
+            }
+          });
+          for (let i = 0; i < jadwalMahasiswaToShow.length; i++) {
+            console.log(jadwalMahasiswaToShow[i].isCrash);
+            jadwalMahasiswaToShow[i].isCrash = false;
+            console.log(jadwalMahasiswaToShow[i].isCrash);
+          }
+          for (let i = 0; i < jadwalMahasiswaToShow.length; i++) {
+            for (let j = 0; j < jadwalMahasiswaToShow.length; j++) {
+              // const waktuAkhirI =
+              //   Number(jadwalMahasiswaToShow[i].waktuAkhir.split(':')[0]) * 60 +
+              //   Number(jadwalMahasiswaToShow[i].waktuAkhir.split(':')[1]);
+              const waktuMulaiI =
+                Number(jadwalMahasiswaToShow[i].waktuMulai.split(':')[0]) * 60 +
+                Number(jadwalMahasiswaToShow[i].waktuMulai.split(':')[1]);
+              const waktuAkhirJ =
+                Number(jadwalMahasiswaToShow[j].waktuAkhir.split(':')[0]) * 60 +
+                Number(jadwalMahasiswaToShow[j].waktuAkhir.split(':')[1]);
+              const waktuMulaiJ =
+                Number(jadwalMahasiswaToShow[j].waktuMulai.split(':')[0]) * 60 +
+                Number(jadwalMahasiswaToShow[j].waktuMulai.split(':')[1]);
+              // if (jadwalMahasiswaToShow[i].hari === whatDay && jadwalMahasiswaToShow[j].hari === whatDay) {
+              if (waktuMulaiI >= waktuMulaiJ && waktuMulaiI < waktuAkhirJ) {
+                let dataI = jadwalMahasiswaToShow[i];
+                let dataJ = jadwalMahasiswaToShow[j];
+                dataI.isCrash = dataI.hari === whatDay && true;
+                dataJ.isCrash = dataJ.hari === whatDay && true;
+              } else {
+                jadwalMahasiswaToShow[i].isCrash = false;
+                jadwalMahasiswaToShow[j].isCrash = false;
+              }
+              // }
+            }
+          }
+          console.log('jadwalMahasiswaToShow');
+          console.log(jadwalMahasiswaToShow);
+          setJadwal(jadwalMahasiswaToShow);
+        });
       }
-      setJadwal(brandNewJadwal);
-    };
-    jadwalDiProses();
-    if (mounted) {
-      setloading(false);
-    }
+      if (mounted) {
+        setloading(false);
+      }
+    });
     return function cleanup() {
       mounted = false;
     };
@@ -144,7 +199,7 @@ const SchedulePage = ({history}) => {
                     history.push({
                       pathname: '/tambah_mataKuliah',
                       mataKuliah: item,
-                      data: data,
+                      tahunAjar: tahunAjar,
                     })
                   }>
                   <Text

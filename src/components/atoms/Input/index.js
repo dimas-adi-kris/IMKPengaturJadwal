@@ -3,6 +3,7 @@ import {StyleSheet, Text, TextInput, View} from 'react-native';
 /**
  *
  * @param {string} label - string untuk label
+ * @param {func} onChangeText - fungsi setiap teks berubah
  * @returns - return object text dan textInput
  */
 const Input = ({

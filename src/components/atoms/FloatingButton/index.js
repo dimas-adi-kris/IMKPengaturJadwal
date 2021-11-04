@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, TouchableOpacity} from 'react-native';
 import {IcPlus} from '../../../assets';
 
 const FloatingButton = ({history, pathname, dataPassHistory}) => {
@@ -9,7 +9,7 @@ const FloatingButton = ({history, pathname, dataPassHistory}) => {
       onPress={() =>
         history.push({
           pathname: pathname,
-          data: dataPassHistory,
+          tahunAjar: dataPassHistory,
         })
       }>
       <IcPlus style={styles.matakuliahIcon} />
