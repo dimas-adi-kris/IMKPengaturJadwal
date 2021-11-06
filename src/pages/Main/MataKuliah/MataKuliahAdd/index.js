@@ -29,8 +29,6 @@ const MataKuliahAdd = ({history}) => {
   }, []);
   const justMahasiswa = () => {
     getItem('jadwalForMahasiswa').then(rt => {
-      // console.log('before');
-      // console.log(rt);
       rt.forEach(doc => {
         if (doc.id === formMk.id) {
           doc.nama = formMk.nama;
@@ -40,8 +38,6 @@ const MataKuliahAdd = ({history}) => {
           doc.waktuAkhir = formMk.waktuAkhir;
         }
       });
-      // console.log('after');
-      // console.log(rt);
       setItem('jadwalForMahasiswa', rt);
       history.push({pathname: '/jadwal', data: tahunAjar});
     });
@@ -114,7 +110,6 @@ const MataKuliahAdd = ({history}) => {
           <SelectDropdown
             data={hari}
             onSelect={(selectedItem, index) => {
-              // console.log(selectedItem, index);
               setFormMk({...formMk, hari: index});
             }}
             buttonStyle={styles.dropdown}

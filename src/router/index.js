@@ -7,6 +7,7 @@ import {
   MataKuliahAdd,
   MataKuliahPage,
   ProfileMainPage,
+  Register,
   ScheduleAdd,
   SchedulePage,
   SemesterMenu,
@@ -21,6 +22,7 @@ const Router = () => {
         <Switch>
           <Route exact path="/" component={Splash} />
           <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
           <Route exact path="/main_menu" component={ListSemester} />
           <Route
             exact

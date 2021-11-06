@@ -14,8 +14,6 @@ import {BottomBar} from '../../../components/molecules';
 import mainStyle from '../../../utils/mainStyle';
 import {getItem} from '../../../utils';
 const ListSemester = ({history}) => {
-  // console.log('load listSemester');
-
   const [tahunAjaran, setTahunAjaran] = useState([]);
   const [loading, setloading] = useState(true);
   const [dataPengguna, setDataPengguna] = useState({});
@@ -26,10 +24,6 @@ const ListSemester = ({history}) => {
   };
   useEffect(() => {
     getItem('auth').then(res => {
-      console.log(res);
-      console.log('data');
-      // console.log(res);
-      console.log('data.akun');
       setDataPengguna(res);
     });
     BackHandler.addEventListener('hardwareBackPress', backAction);
@@ -56,7 +50,6 @@ const ListSemester = ({history}) => {
           setloading(false);
         }
       });
-    console.log(dataPengguna);
     return function cleanup() {
       mounted = false;
     };

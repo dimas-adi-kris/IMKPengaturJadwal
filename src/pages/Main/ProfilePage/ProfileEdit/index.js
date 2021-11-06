@@ -53,6 +53,7 @@ const ProfileEdit = ({history}) => {
     if (photo.base64) {
       data.photo = photo.base64;
     }
+    console.log(form.nama);
     firestore()
       .collection('Account')
       .doc(form.id)

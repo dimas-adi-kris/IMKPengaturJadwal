@@ -79,6 +79,7 @@ const SchedulePage = ({history}) => {
     );
   useEffect(() => {
     let mounted = true;
+    setJadwal([]);
     getItem('auth').then(res => {
       setDataPengguna(res);
       if (res.role !== 3) {
@@ -90,7 +91,7 @@ const SchedulePage = ({history}) => {
             .where('TahunAjaran', '==', tahunAjar.id)
             .where('hari', '==', whatDay)
             .get();
-          setJadwal([]);
+          // setJadwal([]);
           getData.forEach(doc => {
             brandNewJadwal.push({id: doc.id, ...doc.data()});
           });
@@ -108,15 +109,10 @@ const SchedulePage = ({history}) => {
               const waktuMulaiJ =
                 Number(brandNewJadwal[j].waktuMulai.split(':')[0]) * 60 +
                 Number(brandNewJadwal[j].waktuMulai.split(':')[1]);
-              // if (brandNewJadwal[i].hari === whatDay && brandNewJadwal[j].hari === whatDay) {
-              // console.log(waktuMulaiI, waktuMulaiJ);
-              if (waktuMulaiI >= waktuMulaiJ && waktuMulaiI < waktuAkhirJ) {
-                brandNewJadwal[i].isCrash =
-                  brandNewJadwal[i].hari === whatDay && true;
-                brandNewJadwal[j].isCrash =
-                  brandNewJadwal[j].hari === whatDay && true;
+              if (waktuMulaiI > waktuMulaiJ && waktuMulaiI < waktuAkhirJ) {
+                brandNewJadwal[i].isCrash = true;
+                brandNewJadwal[j].isCrash = true;
               }
-              // }
             }
           }
           setJadwal(brandNewJadwal);
@@ -131,9 +127,7 @@ const SchedulePage = ({history}) => {
             }
           });
           for (let i = 0; i < jadwalMahasiswaToShow.length; i++) {
-            console.log(jadwalMahasiswaToShow[i].isCrash);
             jadwalMahasiswaToShow[i].isCrash = false;
-            console.log(jadwalMahasiswaToShow[i].isCrash);
           }
           for (let i = 0; i < jadwalMahasiswaToShow.length; i++) {
             for (let j = 0; j < jadwalMahasiswaToShow.length; j++) {
@@ -150,7 +144,7 @@ const SchedulePage = ({history}) => {
                 Number(jadwalMahasiswaToShow[j].waktuMulai.split(':')[0]) * 60 +
                 Number(jadwalMahasiswaToShow[j].waktuMulai.split(':')[1]);
               // if (jadwalMahasiswaToShow[i].hari === whatDay && jadwalMahasiswaToShow[j].hari === whatDay) {
-              if (waktuMulaiI >= waktuMulaiJ && waktuMulaiI < waktuAkhirJ) {
+              if (waktuMulaiI > waktuMulaiJ && waktuMulaiI < waktuAkhirJ) {
                 let dataI = jadwalMahasiswaToShow[i];
                 let dataJ = jadwalMahasiswaToShow[j];
                 dataI.isCrash = dataI.hari === whatDay && true;
@@ -162,8 +156,6 @@ const SchedulePage = ({history}) => {
               // }
             }
           }
-          console.log('jadwalMahasiswaToShow');
-          console.log(jadwalMahasiswaToShow);
           setJadwal(jadwalMahasiswaToShow);
         });
       }

@@ -1,6 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import firestore from '@react-native-firebase/firestore';
-import {StyleSheet, Text, ToastAndroid, View} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  ToastAndroid,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Button, Input} from '../../../components';
 import {ActivityIndicator} from 'react-native-paper';
 import {setItem, getItem} from '../../../utils';
@@ -74,9 +80,11 @@ const Login = ({history}) => {
           }}
         />
         <Button text="Login" onPress={loginAct} />
-        <View style={{alignItems: 'center'}}>
+        <TouchableOpacity
+          style={{alignItems: 'center'}}
+          onPress={() => history.push('/register')}>
           <Text>Register</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

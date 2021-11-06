@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-community/async-storage';
+import {ToastAndroid} from 'react-native';
 
 const setItem = async (key, item) => {
   try {
@@ -23,7 +24,7 @@ const clearItem = async () => {
   try {
     await AsyncStorage.clear();
   } catch (e) {
-    console.log(e);
+    ToastAndroid.show(e, ToastAndroid.SHORT);
   }
 };
 export {setItem, getItem, clearItem};

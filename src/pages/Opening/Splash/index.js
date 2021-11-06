@@ -4,7 +4,6 @@ import {IcUnsri} from '../../../assets';
 import {getItem} from '../../../utils';
 
 const Splash = ({history}) => {
-  console.log();
   // const [button, setButton] = useState(0);
   useEffect(() => {
     getItem('auth').then(rs => {
